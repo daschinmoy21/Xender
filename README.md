@@ -3,9 +3,12 @@
 ## STEPS
 Git clone the repo 
 ````
-```https://github.com/daschinmoy21/Xender.git
+```
+https://github.com/daschinmoy21/Xender.git
+
 ```
 Inside the dir run 
+
 ```
 bun server.js
 ```
