@@ -1,6 +1,7 @@
 const express = require('express');
 const WebSocket = require('ws');
 const path = require('path');
+const os = require('os');
 
 const app = express();
 const server = require('http').createServer(app);
@@ -9,7 +10,7 @@ const wss = new WebSocket.Server({ server });
 // Store connected clients with their peer IDs
 const clients = new Map();
 
-app.use(express.static(path.join(__dirname, '.')));
+app.use(express.static('public'));
 
 wss.on('connection', (ws) => {
     console.log('New client connected');
@@ -69,4 +70,13 @@ wss.on('connection', (ws) => {
 
 server.listen(3000, () => {
     console.log('Server running on http://localhost:3000');
+    const interfaces = os.networkInterfaces();
+    for (const name of Object.keys(interfaces)) {
+        for (const iface of interfaces[name]) {
+            const {address, family, internal} = iface;
+            if (family === 'IPv4' && !internal) {
+                console.log(`Or on your local network: http://${address}:3000`);
+            }
+        }
+    }
 });

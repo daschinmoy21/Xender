@@ -7,7 +7,7 @@ const statusDiv = document.getElementById('status');
 const peersDiv = document.getElementById('peers');
 
 // WebSocket signaling server
-const signalingServer = new WebSocket('ws://localhost:3000');
+const signalingServer = new WebSocket(`ws://${window.location.host}`);
 
 signalingServer.onopen = () => {
   console.log('Connected to signaling server');
